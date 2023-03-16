@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::after {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+body {
+	font-family: 'Ubuntu', sans-serif;
+	background-color: #eef5ff;
+}
+.bgc-img {
+	background-image: url('./assets/imgs/bg-sidebar-mobile.svg');
+	background-position: center;
+	background-size: cover;
+}
+.curr-item {
+	background-color: #fff;
+	color: black;
+}
+.not-curr-item {
+	background-color: transparent;
+	border: 1px solid white;
+	color: white;
+}
+.switch {
+	position: relative;
+	width: 3em;
+	height: 1.5em;
+	border-radius: 20px;
+	background-color: hsl(213, 96%, 18%);
+	transition: background 0.3s;
+	cursor: pointer;
+}
+.switch::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 30%;
+	transform: translate(-50%, -50%);
+	border-radius: 50%;
+	height: 1em;
+	width: 1em;
+	background-color: #fff;
+	transition: left 0.3s;
+}
+.switch:checked:after {
+	left: 70%;
+}
+
+@media (min-width: 768px) {
+	.bgc-img {
+		background-image: url('./assets/imgs/bg-sidebar-desktop.svg');
+		border-radius: 0.5rem;
+	}
+}

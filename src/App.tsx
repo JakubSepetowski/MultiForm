@@ -4,7 +4,7 @@ import { UserInfoProvider } from './store/UserInfoProvider';
 const App = () => {
 	return (
 		<UserInfoProvider>
-			<Form />;
+			<Form />
 		</UserInfoProvider>
 	);
 };

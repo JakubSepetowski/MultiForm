@@ -9,7 +9,6 @@ const addonItems = [
 		title: 'Online service',
 		desc: 'Access to multiplayer games',
 		price: 1,
-		
 	},
 	{
 		id: 2,
@@ -26,11 +25,11 @@ const addonItems = [
 ];
 
 export const AddOns = () => {
-	const {setAddons , addOns}=useContext(UserContex)
+	const { setAddons, addOns } = useContext(UserContex);
 	const selectHandler = (e: React.MouseEvent<HTMLDivElement>) => {
 		const target = e.target as HTMLDivElement;
 		const attribute = target.getAttribute('data-id');
-		setAddons(Number(attribute))
+		setAddons(Number(attribute));
 		console.log(addOns);
 	};
 	return (

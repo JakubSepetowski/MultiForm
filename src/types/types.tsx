@@ -9,7 +9,11 @@ export interface State {
 		largStore: boolean;
 		CustomProfile: boolean;
 	};
+	step1IsValid: boolean;
+	step2IsValid: boolean;
+	step3IsValid: boolean;
 }
+
 export enum ActionTypes {
 	name = 'NAME',
 	email = 'EMAIL',
@@ -17,6 +21,9 @@ export enum ActionTypes {
 	plan = 'PLAN',
 	mthPlan = 'MONTHLYPLAN',
 	addons = 'ADDONS',
+	valid1 = 'VALID1',
+	valid2 = 'VALID2',
+	valid3 = 'VALID3',
 }
 
 export type Action =
@@ -25,4 +32,7 @@ export type Action =
 	| { type: ActionTypes.phone; number: string }
 	| { type: ActionTypes.plan; id: number }
 	| { type: ActionTypes.mthPlan }
-	| { type: ActionTypes.addons; id: number };
+	| { type: ActionTypes.addons; id: number }
+	| { type: ActionTypes.valid1; valid: boolean }
+	| { type: ActionTypes.valid2; valid: boolean }
+	| { type: ActionTypes.valid3; valid: boolean };

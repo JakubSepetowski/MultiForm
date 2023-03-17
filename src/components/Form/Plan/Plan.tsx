@@ -10,29 +10,42 @@ const plans = [
 	{
 		id: '1',
 		title: 'Arcade',
-		price: '$9/mo',
+		price: {
+			monthly: '$9/mo',
+			yearly: '$90/mo',
+		},
+
 		icon: arcadeIcon,
 	},
 	{
 		id: '2',
 		title: 'Advanced',
-		price: '$12/mo',
+		price:{
+			monthly: '$12/mo',
+			yearly: '$120/mo'
+
+		},
 		icon: advanceIcon,
 	},
 	{
 		id: '3',
 		title: 'Pro',
-		price: '$15/mo',
+		price:{
+			monthly: '$15/mo',
+			yearly: '$150/mo'
+
+		},
 		icon: proIcon,
 	},
 ];
 
 export const Plan = () => {
-	const { setPlan, changeMonthlyPlan, monthyPlan } = useContext(UserContex);
+	const { setPlan, changeMonthlyPlan, monthyPlan, setStep2IsValid } = useContext(UserContex);
 	const onSelectHandler = (e: React.MouseEvent<HTMLDivElement>) => {
 		const target = e.target as HTMLDivElement;
 		const attribute = target.getAttribute('data-id');
 		setPlan(Number(attribute));
+		setStep2IsValid(true);
 	};
 	const onChangePaymentHanlder = () => {
 		changeMonthlyPlan();

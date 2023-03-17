@@ -4,13 +4,16 @@ const initialState = {
 	name: '',
 	email: '',
 	phoneNumber: '',
-	plan: 1,
+	plan: 0,
 	monthyPlan: true,
 	addOns: {
 		onlineService: true,
 		largStore: false,
 		CustomProfile: false,
 	},
+	step1IsValid: false,
+	step2IsValid: false,
+	step3IsValid: false,
 
 	setName: (name: string) => {},
 	setEmail: (email: string) => {},
@@ -18,6 +21,9 @@ const initialState = {
 	setPlan: (planId: number) => {},
 	changeMonthlyPlan: () => {},
 	setAddons: (id: number) => {},
+	setStep1IsValid: (valid: boolean) => {},
+	setStep2IsValid: (valid: boolean) => {},
+	setStep3IsValid: (valid: boolean) => {},
 };
 
-export const UserContex= React.createContext(initialState);
+export const UserContex = React.createContext(initialState);

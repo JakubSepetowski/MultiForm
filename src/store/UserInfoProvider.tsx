@@ -11,15 +11,17 @@ const InitialUserState: State = {
 	email: '',
 	phoneNumber: '',
 	plan: 0,
+	planPrice: 0,
 	monthyPlan: true,
 	addOns: {
 		onlineService: true,
 		largStore: false,
 		CustomProfile: false,
 	},
+	addOnsPrice: 1,
 	step1IsValid: false,
 	step2IsValid: false,
-	step3IsValid: false,
+	step3IsValid: true,
 };
 const userInfoReducer = (state: State, action: Action) => {
 	switch (action.type) {
@@ -39,14 +41,34 @@ const userInfoReducer = (state: State, action: Action) => {
 				phoneNumber: action.number,
 			};
 		case ActionTypes.plan:
+			let amount = 9;
+			if (action.id === 2) {
+				amount = 12;
+			}
+			if (action.id === 3) {
+				amount = 15;
+			}
+			if (!state.monthyPlan) amount = amount * 10;
 			return {
 				...state,
 				plan: action.id,
+				planPrice: amount,
 			};
 		case ActionTypes.mthPlan:
+			let curentAmount = state.planPrice;
+			let currentAddonsAmount = state.addOnsPrice;
+			if (state.monthyPlan) {
+				curentAmount = curentAmount * 10;
+				currentAddonsAmount = currentAddonsAmount * 10;
+			} else {
+				curentAmount = curentAmount / 10;
+				currentAddonsAmount = currentAddonsAmount / 10;
+			}
 			return {
 				...state,
 				monthyPlan: !state.monthyPlan,
+				planPrice: curentAmount,
+				addOnsPrice: currentAddonsAmount,
 			};
 		case ActionTypes.valid1:
 			return {
@@ -58,36 +80,63 @@ const userInfoReducer = (state: State, action: Action) => {
 				...state,
 				step2IsValid: action.valid,
 			};
-		case ActionTypes.valid3:
-			return {
-				...state,
-				step3IsValid: action.valid,
-			};
+
 		case ActionTypes.addons: {
-			if (action.id === 1)
+			let addonsAmount = state.addOnsPrice;
+			if (action.id === 1) {
+				if (state.monthyPlan) {
+					if (state.addOns.onlineService) addonsAmount = addonsAmount - 1;
+					else addonsAmount = addonsAmount + 1;
+				} else {
+					if (state.addOns.onlineService) addonsAmount = addonsAmount - 10;
+					else addonsAmount = addonsAmount + 10;
+				}
+
 				return {
 					...state,
 					addOns: {
 						...state.addOns,
-						onlineService: !state.addOns.CustomProfile,
+						onlineService: !state.addOns.onlineService,
 					},
+					addOnsPrice: addonsAmount,
 				};
-			if (action.id === 2)
+			}
+			if (action.id === 2) {
+				if (state.monthyPlan) {
+					if (state.addOns.largStore) addonsAmount = addonsAmount - 2;
+					else addonsAmount = addonsAmount + 2;
+				} else {
+					if (state.addOns.largStore) addonsAmount = addonsAmount - 20;
+					else addonsAmount = addonsAmount + 20;
+				}
+
 				return {
 					...state,
 					addOns: {
 						...state.addOns,
 						largStore: !state.addOns.largStore,
 					},
+					addOnsPrice: addonsAmount,
 				};
-			if (action.id === 3)
+			}
+			if (action.id === 3) {
+				if (state.monthyPlan) {
+					if (state.addOns.CustomProfile) addonsAmount = addonsAmount - 2;
+					else addonsAmount = addonsAmount + 2;
+				} else {
+					if (state.addOns.CustomProfile) addonsAmount = addonsAmount - 20;
+					else addonsAmount = addonsAmount + 20;
+				}
+
 				return {
 					...state,
 					addOns: {
 						...state.addOns,
 						CustomProfile: !state.addOns.CustomProfile,
 					},
+					addOnsPrice: addonsAmount,
 				};
+			}
 		}
 
 		default:
@@ -122,17 +171,16 @@ export const UserInfoProvider = (props: Props) => {
 	const setStep2IsValidHandler = (valid: boolean) => {
 		dispatchUserAction({ type: ActionTypes.valid2, valid });
 	};
-	const setStep3IsValidHandler = (valid: boolean) => {
-		dispatchUserAction({ type: ActionTypes.valid3, valid });
-	};
 
 	const userContext = {
 		name: userState.name,
 		email: userState.email,
 		phoneNumber: userState.phoneNumber,
 		plan: userState.plan,
+		planPrice: userState.planPrice,
 		monthyPlan: userState.monthyPlan,
 		addOns: userState.addOns,
+		addOnsPrice: userState.addOnsPrice,
 		step1IsValid: userState.step1IsValid,
 		step2IsValid: userState.step2IsValid,
 		step3IsValid: userState.step3IsValid,
@@ -145,7 +193,6 @@ export const UserInfoProvider = (props: Props) => {
 		setAddons: setAddonsHandler,
 		setStep1IsValid: setStep1IsValidHandler,
 		setStep2IsValid: setStep2IsValidHandler,
-		setStep3IsValid: setStep3IsValidHandler,
 	};
 
 	return <UserContex.Provider value={userContext}>{props.children}</UserContex.Provider>;

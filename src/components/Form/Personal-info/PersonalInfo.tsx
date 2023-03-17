@@ -28,7 +28,7 @@ export const PersonalInfo = () => {
 		inputValueHnalder: phoneNumberValueHandler,
 		inputBlurHandler: phoneNumberBlurHandler,
 	} = useInput(
-		(value: string) => value.trim().length >= 8 && value.trim().length <= 10,
+		(value: string) => value.trim().length >= 8 && value.trim().length <= 12,
 		phoneNumber
 	);
 
@@ -53,11 +53,15 @@ export const PersonalInfo = () => {
 					value={nameInput}
 					onChange={nameValueHandler}
 					onBlur={nameBlurHandler}
-					className='w-full p-1 rounded-md border mt-1 pl-2 pr-2'
+					className={`w-full p-1 rounded-md border mt-1 pl-2 pr-2 ${
+						isNameTouched && !isNameValid ? 'bg-red-100' : ''
+					} `}
 					type='text'
 					id='name'
 				/>
-				{isNameTouched && !isNameValid && <p>This field cannot be empty</p>}
+				{isNameTouched && !isNameValid && (
+					<p className='text-xs mt-1  md:text-sm text-my-red'>This field cannot be empty.</p>
+				)}
 			</div>
 			<div className='mt-2 text-blue-900 text-sm xsm:text-lg xsm:mt-4'>
 				<label htmlFor='email'>Email</label>
@@ -65,11 +69,15 @@ export const PersonalInfo = () => {
 					onChange={emailValueHandler}
 					onBlur={emailBlurHandler}
 					value={emailInput}
-					className='w-full p-1 rounded-md border mt-1 pl-2 pr-2'
+					className={`w-full p-1 rounded-md border mt-1 pl-2 pr-2 ${
+						isEmailTouched && !isEmailValid ? 'bg-red-100' : ''
+					} `}
 					type='text'
 					id='emial'
 				/>
-				{isEmailTouched && !isEmailValid && <p>Email must be valid</p>}
+				{isEmailTouched && !isEmailValid && (
+					<p className='text-xs mt-1 md:text-sm text-my-red'>Email must be valid</p>
+				)}
 			</div>
 			<div className='mt-2 text-blue-900 text-sm xsm:text-lg xsm:mt-4'>
 				<label htmlFor='phone'>Phone Number</label>
@@ -77,11 +85,15 @@ export const PersonalInfo = () => {
 					onChange={phoneNumberValueHandler}
 					onBlur={phoneNumberBlurHandler}
 					value={phoneNumberInput}
-					className='w-full p-1 rounded-md border mt-1 pl-2 pr-2'
-					type='text'
+					className={`w-full p-1 rounded-md border mt-1 pl-2 pr-2 ${
+						isPhoneNumberTouched && !isPhoneNumberValid ? 'bg-red-100' : ''
+					} `}
+					type='number'
 					id='phone'
 				/>
-				{isPhoneNumberTouched && !isPhoneNumberValid && <p>Phone number must be valid</p>}
+				{isPhoneNumberTouched && !isPhoneNumberValid && (
+					<p className='text-xs mt-1  md:text-sm text-my-red'>Phone number must be valid</p>
+				)}
 			</div>
 		</form>
 	);

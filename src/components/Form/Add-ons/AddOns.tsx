@@ -30,7 +30,6 @@ export const AddOns = () => {
 		const target = e.target as HTMLDivElement;
 		const attribute = target.getAttribute('data-id');
 		setAddons(Number(attribute));
-		console.log(addOns);
 	};
 	return (
 		<form className='h-full'>

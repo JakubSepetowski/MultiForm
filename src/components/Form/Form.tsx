@@ -21,7 +21,7 @@ export const Form = () => {
 	if (curentStep === 3) {
 		validity = step3IsValid;
 	}
-	
+
 	const nextStepHandler = () => {
 		if (curentStep < 4) setCurrentStep((prev) => prev + 1);
 	};
@@ -29,7 +29,12 @@ export const Form = () => {
 	const prevStepHandler = () => {
 		if (curentStep > 1) setCurrentStep((prev) => prev - 1);
 	};
-	const submintHanlder = () => {};
+	const submintHanlder = () => {
+		setCurrentStep(5);
+	};
+	const goToPlanHandler = () => {
+		setCurrentStep(2);
+	};
 
 	return (
 		<main className='md:flex md:items-center md:justify-center md:min-h-screen md:p-4 '>
@@ -39,17 +44,17 @@ export const Form = () => {
 					{curentStep === 1 && <PersonalInfo />}
 					{curentStep === 2 && <Plan />}
 					{curentStep === 3 && <AddOns />}
-					{curentStep === 4 && <Finishing />}
-					{/* { <Submit />} */}
+					{curentStep === 4 && <Finishing onGoToPlan={goToPlanHandler} />}
+					{curentStep === 5 && <Submit />}
 					<div className='absolute bottom-0 left-0 bg-white p-4 h-12 xsm:h-20 w-full flex justify-between items-center md:relative md:bg-none md:p-0 md:mt-20 text-sm'>
-						{curentStep !== 1 && (
+						{curentStep !== 1 && curentStep!==5 && (
 							<button
 								onClick={prevStepHandler}
 								className=' text-neutral-500 p-4 rounded-md h-8 pl-4 pr-4 flex items-center xsm:text-base xsm:h-9    md:h-10 md:pl-4 md:pr-4 '>
 								Go Back
 							</button>
 						)}
-						{curentStep !== 4 && (
+						{curentStep !== 4 && curentStep!==5&&(
 							<button
 								disabled={!validity}
 								onClick={nextStepHandler}

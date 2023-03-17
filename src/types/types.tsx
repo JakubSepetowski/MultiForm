@@ -3,15 +3,18 @@ export interface State {
 	email: string;
 	phoneNumber: string;
 	plan: number;
+	planPrice: number;
 	monthyPlan: boolean;
 	addOns: {
 		onlineService: boolean;
 		largStore: boolean;
 		CustomProfile: boolean;
 	};
+	addOnsPrice: number,
 	step1IsValid: boolean;
 	step2IsValid: boolean;
 	step3IsValid: boolean;
+	
 }
 
 export enum ActionTypes {
@@ -23,7 +26,7 @@ export enum ActionTypes {
 	addons = 'ADDONS',
 	valid1 = 'VALID1',
 	valid2 = 'VALID2',
-	valid3 = 'VALID3',
+	
 }
 
 export type Action =
@@ -35,4 +38,4 @@ export type Action =
 	| { type: ActionTypes.addons; id: number }
 	| { type: ActionTypes.valid1; valid: boolean }
 	| { type: ActionTypes.valid2; valid: boolean }
-	| { type: ActionTypes.valid3; valid: boolean };
+	

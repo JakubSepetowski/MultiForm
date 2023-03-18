@@ -50,6 +50,7 @@ export const PersonalInfo = () => {
 			<div className='mt-4 text-blue-900 text-sm xsm:text-lg xsm:mt-8 md:mt-10'>
 				<label htmlFor='name'>Name</label>
 				<input
+					placeholder='e.g. Stephen King'
 					value={nameInput}
 					onChange={nameValueHandler}
 					onBlur={nameBlurHandler}
@@ -66,6 +67,7 @@ export const PersonalInfo = () => {
 			<div className='mt-2 text-blue-900 text-sm xsm:text-lg xsm:mt-4'>
 				<label htmlFor='email'>Email</label>
 				<input
+					placeholder='e.g. stephenking@lorem.com'
 					onChange={emailValueHandler}
 					onBlur={emailBlurHandler}
 					value={emailInput}
@@ -82,6 +84,7 @@ export const PersonalInfo = () => {
 			<div className='mt-2 text-blue-900 text-sm xsm:text-lg xsm:mt-4'>
 				<label htmlFor='phone'>Phone Number</label>
 				<input
+					placeholder='e.g.  +1 234 567 890'
 					onChange={phoneNumberValueHandler}
 					onBlur={phoneNumberBlurHandler}
 					value={phoneNumberInput}
